@@ -4,6 +4,21 @@ class KonaneGame:
     def __init__(self):
         NotImplemented
 
+        
+    def initialize_board(self, board_size):
+        board = []
+        tile = Tile(2,0,0,0)
+        for i in range(board_size):
+            row_gui = []
+            for j in range(board_size):
+                row_gui.append(tile)
+                tile = Tile(3-tile.piece, tile.outline, i, j+1)
+            board.append(row_gui)
+            if board_size%2 == 0:
+                tile = Tile(3-tile.piece, tile.outline, i+1, 0)
+
+        return board
+
 
     def generate_all_possible_moves(self, board, player):
         """
