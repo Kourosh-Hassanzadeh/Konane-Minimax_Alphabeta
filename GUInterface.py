@@ -10,7 +10,7 @@ class Graphic(tk.Tk):
         # Save metadata
         self.title("Konane | Bash Games")
         #self.wm_iconbitmap("deep_red.ico")
-        self.wm_iconbitmap("BashGames.ico")
+        self.wm_iconbitmap("Doc/BashGames.ico")
         self.resizable(False, False)
         self.configure(bg="#fff")
 
