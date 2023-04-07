@@ -10,9 +10,9 @@ class PlayKonane:
         self.game_manager = game_manager
         self.agent1 = agent1
         self.agent2 = agent2
-        self.reset(init_board)
+        self.play(init_board)
         
-    def reset(self, init_board):
+    def play(self, init_board):
         """
         Resets the starting board state.
         """
@@ -115,7 +115,7 @@ class PlayKonane:
         move.
         """
         self.computing = True
-        self.board = self.game_manager.next_move(self.board, player, move)
+        self.board = self.board.next_board(player, move)
         self.board_view.draw_tiles(board = self.board.game_board)
         self.computing = False
         print("player: " + str(player))
