@@ -10,7 +10,7 @@ class PlayGame:
     def __init__(self):
         NotImplemented
 
-    def play_konane(self):
+    def play(self):
         size = 6
         game = KonaneGame()
         initial_board = Board(size, game.initialize_board(size))
@@ -26,4 +26,4 @@ class PlayGame:
 
 
 if __name__ == '__main__':
-    PlayGame().play_konane()
+    PlayGame().play()
