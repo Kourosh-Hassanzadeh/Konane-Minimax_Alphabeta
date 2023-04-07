@@ -1,5 +1,6 @@
 
 from Tile import Tile
+import copy
 
 class KonaneError(AttributeError):
     """
@@ -10,6 +11,47 @@ class Board():
     def __init__(self, size, init_board):
         self.size = size
         self.game_board = init_board
+
+
+    def next_board(self, player, move):
+        """
+        Given a move for a particular player from (r1,c1) to (r2,c2) this
+        executes the move on a copy of the current konane board.  It will
+        raise a KonaneError if the move is invalid. It returns the copy of
+        the board, and does not change the given board.
+        """
+        r1 = move[0]
+        c1 = move[1]
+        r2 = move[2]
+        c2 = move[3]
+
+        next = copy.deepcopy(self)
+        if not (self.valid(r1, c1) and self.valid(r2, c2)):
+            raise KonaneError
+        
+        if next.game_board[r1][c1].piece != player:
+            raise KonaneError
+        dist = self.distance(r1, c1, r2, c2)
+        if dist == 0:
+            if self.is_opening_move():
+                next.game_board[r1][c1].piece = Tile.P_NONE
+                return next
+            raise KonaneError
+        if next.game_board[r2][c2].piece != Tile.P_NONE:
+            raise KonaneError
+        jumps = dist/2
+        dr = int((r2 - r1)/dist)
+        dc = int((c2 - c1)/dist)
+        for i in range(int(jumps)):
+            #test
+            if next.game_board[r1+dr][c1+dc].piece != (3-player):
+                raise KonaneError
+            next.game_board[r1][c1].piece = Tile.P_NONE
+            next.game_board[r1+dr][c1+dc].piece = Tile.P_NONE
+            r1 += 2*dr
+            c1 += 2*dc
+            next.game_board[r1][c1].piece = player
+        return next
 
 
     def valid(self, row, col):
@@ -29,6 +71,9 @@ class Board():
         return abs(r1-r2 + c1-c2)
 
 
+    def is_opening_move(self):
+        return self.count_symbol(Tile.P_NONE) <= 1
+
     def count_symbol(self, symbol):
         """
         Returns the number of instances of the symbol on the board.
@@ -39,7 +84,7 @@ class Board():
                 if self.game_board[r][c].piece == symbol:
                     count += 1
         return count
-
+            
 
     def contains(self, row, col, symbol):
         """
