@@ -20,7 +20,7 @@ class KonaneGame:
         game = PlayKonane(initial_board, game_manager, agent1=agent1, agent2=agent2)
 
         # player vs bot
-        #game = PlayKonane(initial_board, agent1=agent1)
+        #game = PlayKonane(initial_board, game_manager, agent1=agent1)
     
 
     def initialize_board(self, board_size):
