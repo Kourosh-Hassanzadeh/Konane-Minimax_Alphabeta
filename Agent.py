@@ -29,7 +29,7 @@ class Agent:
         best_move = None
         best_move_value = self.MIN_VALUE
         for move in possible_moves:
-            temp_move, value = self.min(current_board.next_board(current_color, move), self.game.opponent(current_color), depth + 1, alpha, beta)
+            temp_move, value = self.min(current_board.next_board(current_color, move), self.game.opponent(current_color), depth + 1)
             if (value > best_move_value):
                 best_move_value = value
                 best_move = move
@@ -39,7 +39,7 @@ class Agent:
         return best_move, best_move_value
 
    
-    def min(self, current_board, current_color, depth, alpha, beta):
+    def min(self, current_board, current_color, depth):
         NotImplemented
 
 
