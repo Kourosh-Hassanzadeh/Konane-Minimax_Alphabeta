@@ -40,7 +40,24 @@ class Agent:
 
    
     def min(self, current_board, current_color, depth):
-        NotImplemented
+        if (self.game.check_terminal(current_board, current_color)):
+            return None, self.game.evaluate(current_board, current_color, -1000)
+
+        if (depth == self.max_depth):
+            return None, self.game.evaluate(current_board, current_color)
+
+        possible_moves =  self.game.generate_all_possible_moves(current_board, current_color)
+        best_move = None
+        best_move_value = self.MAX_VALUE
+        for move in possible_moves:
+            temp_move, value = self.max(current_board.next_board(current_color, move), self.game.opponent(current_color), depth + 1)
+            if (value < best_move_value):
+                best_move_value = value
+                best_move = move
+                
+                # implement alpha-beta here
+                
+        return best_move, best_move_value
 
 
 

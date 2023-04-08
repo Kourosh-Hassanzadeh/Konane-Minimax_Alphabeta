@@ -3,6 +3,7 @@ from Tile import Tile
 from Agent import Agent
 from Board import Board
 from KonaneGame import KonaneGame
+from KonanaGame2 import KonaneGame2
 
 
 class PlayGame:
