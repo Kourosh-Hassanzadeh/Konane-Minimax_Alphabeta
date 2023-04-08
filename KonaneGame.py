@@ -150,6 +150,9 @@ class KonaneGame:
                 vWhite += 1
             elif (board.game_board[5][5].piece == Tile.P_Black):
                 vBlack += 1
+            
+            value += (30 * vWhite) - (30*vBlack)
+
 
         elif (color == Tile.P_Black):
             if (board.game_board[0][0].piece == Tile.P_Black):
@@ -172,7 +175,7 @@ class KonaneGame:
             elif (board.game_board[5][5].piece == Tile.P_White):
                 vWhite += 1
 
-        value += (30 * vWhite) - (30*vBlack)
+            value += (30 * vBlack) - (30*vWhite)
 
         value += terminal_value
 
